@@ -1,0 +1,26 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-mcyWhqEH.css",
+    "name": "app",
+    "names": [
+      "app.css"
+    ],
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/css/bouesti.css": {
+    "file": "assets/bouesti-ByKadHT-.css",
+    "name": "bouesti",
+    "names": [
+      "bouesti.css"
+    ],
+    "src": "resources/css/bouesti.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-BNGOJZ0V.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  }
+}
