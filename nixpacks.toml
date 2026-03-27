@@ -13,4 +13,4 @@ cmds = [
 ]
 
 [start]
-cmd = "php -c php.ini -S 0.0.0.0:$PORT -t public public/index.php"
+cmd = "php artisan migrate --force && php artisan db:seed --force && php -c php.ini -S 0.0.0.0:$PORT -t public public/index.php"
