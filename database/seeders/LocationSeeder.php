@@ -33,7 +33,10 @@ class LocationSeeder extends Seeder
         ];
 
         foreach ($locations as $location) {
-            Location::create($location);
+            Location::updateOrCreate(
+                ['name' => $location['name']],
+                $location
+            );
         }
 
         $this->command->info('Locations seeded successfully: ' . count($locations) . ' locations created.');
