@@ -644,14 +644,30 @@
         <!-- Quick Search Bar -->
         <form class="hero-search" action="{{ route('properties.search') }}" method="GET" id="heroSearchForm">
             <div class="hero-search-group">
-                <label for="search_area">📍 Area</label>
-                <select name="area" id="search_area">
-                    <option value="">All Areas</option>
-                    <option value="Odo-Oja">Odo-Oja</option>
-                    <option value="Afon Lodge area">Afon Lodge Area</option>
-                    <option value="Temidire">Temidire</option>
-                    <option value="Ilawe Road">Ilawe Road</option>
-                    <option value="Ijigbo">Ijigbo</option>
+                <label for="search_location">📍 Location</label>
+                <select name="location_id" id="search_location">
+                    <option value="">All Locations</option>
+                    @if($locations->where('classification', 'core_quarter')->count() > 0)
+                        <optgroup label="Core Quarters">
+                            @foreach($locations->where('classification', 'core_quarter') as $location)
+                                <option value="{{ $location->id }}">{{ $location->name }}</option>
+                            @endforeach
+                        </optgroup>
+                    @endif
+                    @if($locations->where('classification', 'ward')->count() > 0)
+                        <optgroup label="Wards">
+                            @foreach($locations->where('classification', 'ward') as $location)
+                                <option value="{{ $location->id }}">{{ $location->name }}</option>
+                            @endforeach
+                        </optgroup>
+                    @endif
+                    @if($locations->where('classification', 'neighborhood')->count() > 0)
+                        <optgroup label="Neighborhoods">
+                            @foreach($locations->where('classification', 'neighborhood') as $location)
+                                <option value="{{ $location->id }}">{{ $location->name }}</option>
+                            @endforeach
+                        </optgroup>
+                    @endif
                 </select>
             </div>
 

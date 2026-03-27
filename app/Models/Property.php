@@ -10,7 +10,7 @@ class Property extends Model
     use HasFactory;
 
     protected $fillable = [
-        'landlord_id', 'title', 'description', 'type',
+        'landlord_id', 'location_id', 'title', 'description', 'type',
         'address', 'area', 'distance_from_campus', 'city', 'state',
         'price_per_year', 'rooms_available', 'total_rooms',
         'status', 'has_electricity', 'has_water',
@@ -41,6 +41,11 @@ class Property extends Model
     public function scopeInArea($query, string $area)
     {
         return $query->where('area', 'like', "%{$area}%");
+    }
+
+    public function scopeInLocation($query, int $locationId)
+    {
+        return $query->where('location_id', $locationId);
     }
 
     // ─── Helpers ───────────────────────────────────────────────────────────────
@@ -104,5 +109,10 @@ class Property extends Model
     public function landlord()
     {
         return $this->belongsTo(Landlord::class);
+    }
+
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
     }
 }

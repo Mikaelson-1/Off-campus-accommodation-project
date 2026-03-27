@@ -128,12 +128,30 @@
         </div>
         <form class="search-form" action="{{ route('properties.search') }}" method="GET">
             <div class="sf-group">
-                <label>📍 Area</label>
-                <select name="area">
-                    <option value="">All Areas</option>
-                    @foreach(['Odo-Oja','Afon Lodge area','Temidire','Ilawe Road','Ijigbo'] as $a)
-                        <option value="{{ $a }}" {{ $area === $a ? 'selected' : '' }}>{{ $a }}</option>
-                    @endforeach
+                <label>📍 Location</label>
+                <select name="location_id">
+                    <option value="">All Locations</option>
+                    @if($locations->where('classification', 'core_quarter')->count() > 0)
+                        <optgroup label="Core Quarters">
+                            @foreach($locations->where('classification', 'core_quarter') as $location)
+                                <option value="{{ $location->id }}" {{ $locationId == $location->id ? 'selected' : '' }}>{{ $location->name }}</option>
+                            @endforeach
+                        </optgroup>
+                    @endif
+                    @if($locations->where('classification', 'ward')->count() > 0)
+                        <optgroup label="Wards">
+                            @foreach($locations->where('classification', 'ward') as $location)
+                                <option value="{{ $location->id }}" {{ $locationId == $location->id ? 'selected' : '' }}>{{ $location->name }}</option>
+                            @endforeach
+                        </optgroup>
+                    @endif
+                    @if($locations->where('classification', 'neighborhood')->count() > 0)
+                        <optgroup label="Neighborhoods">
+                            @foreach($locations->where('classification', 'neighborhood') as $location)
+                                <option value="{{ $location->id }}" {{ $locationId == $location->id ? 'selected' : '' }}>{{ $location->name }}</option>
+                            @endforeach
+                        </optgroup>
+                    @endif
                 </select>
             </div>
             <div class="sf-group">

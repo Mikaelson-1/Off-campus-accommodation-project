@@ -15,11 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Seed locations first (required for property assignments)
+        $this->call(LocationSeeder::class);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Seed demo properties with location assignments
+        $this->call(PropertySeeder::class);
+
+        $this->command->info('✅ All seeders completed successfully.');
     }
 }
