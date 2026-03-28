@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     libsqlite3-dev \
+    libicu-dev \
     unzip \
     git \
     curl \
