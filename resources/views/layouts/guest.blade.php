@@ -6,7 +6,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title ?? 'BOUESTI Off-Campus Accommodation' }}</title>
     <!-- Vite compiled assets + BOUESTI brand CSS -->
-    @vite(['resources/css/app.css', 'resources/css/bouesti.css', 'resources/js/app.js'])
+    @if(file_exists(public_path('build/manifest.json')))
+        @vite(['resources/css/app.css', 'resources/css/bouesti.css', 'resources/js/app.js'])
+    @else
+        <link rel="stylesheet" href="{{ asset('build/assets/app-D79B-wyU.css') }}">
+        <link rel="stylesheet" href="{{ asset('build/assets/bouesti-CrJiLbLU.css') }}">
+    @endif
     {{ $head ?? '' }}
     <style>
         /* Guarantee full-viewport auth layout — cannot be overridden by Tailwind preflight */
