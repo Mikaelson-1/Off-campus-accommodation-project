@@ -43,6 +43,10 @@ fi
 echo "==> Running migrations..."
 php artisan migrate --force || echo "WARNING: Migrations failed"
 
+# ── Seed demo data (Railway filesystem is ephemeral — seed on every start) ────
+echo "==> Seeding database..."
+php artisan db:seed --force || echo "WARNING: Seeding failed"
+
 # ── Start Laravel built-in server (no Apache needed) ─────────────────────────
 PORT="${PORT:-8080}"
 echo "==> Starting server on 0.0.0.0:${PORT}..."
