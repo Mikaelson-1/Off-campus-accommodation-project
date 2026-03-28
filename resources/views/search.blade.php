@@ -93,6 +93,17 @@
 
         .pagination { margin-top: 2rem; display: flex; justify-content: center; }
 
+        /* ── Custom pagination ───────────────────────────────────────────── */
+        .bouesti-pagination { display: flex; align-items: center; justify-content: center; gap: .4rem; flex-wrap: wrap; margin-top: 2rem; }
+        .pagi-btn { display: inline-flex; align-items: center; justify-content: center; min-width: 38px; height: 38px; padding: 0 .85rem; border-radius: 8px; font-size: .85rem; font-weight: 700; text-decoration: none; transition: all .18s; border: 1.5px solid #e5e9f0; color: #374151; background: #fff; }
+        .pagi-btn:hover { background: #eef1f5; border-color: #192F59; color: #192F59; }
+        .pagi-active { background: #192F59; color: #fff; border-color: #192F59; cursor: default; }
+        .pagi-active:hover { background: #192F59; color: #fff; }
+        .pagi-disabled { color: #c4cdd8; border-color: #e5e9f0; background: #f9fafb; cursor: default; }
+        .pagi-disabled:hover { background: #f9fafb; border-color: #e5e9f0; color: #c4cdd8; }
+        .pagi-dots { border: none; background: none; color: #9ca3af; cursor: default; }
+        .pagi-dots:hover { background: none; border: none; color: #9ca3af; }
+
         @media (max-width: 900px) { .property-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 580px) {
             .property-grid { grid-template-columns: 1fr; }
@@ -225,7 +236,7 @@
 
     <!-- Pagination -->
     <div class="pagination">
-        {{ $properties->withQueryString()->links() }}
+        {{ $properties->withQueryString()->links('vendor.pagination.bouesti') }}
     </div>
 </div>
 </body>
