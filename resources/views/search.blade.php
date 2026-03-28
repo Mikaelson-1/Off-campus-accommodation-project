@@ -115,7 +115,7 @@
     </a>
     <div class="page-nav-links">
         <a href="{{ route('home') }}" class="page-nav-link">← Home</a>
-        <a href="{{ route('login') }}" class="page-nav-btn">🎓 Student Login</a>
+        <a href="{{ route('login') }}" class="page-nav-btn"> Student Login</a>
     </div>
 </nav>
 
@@ -128,7 +128,7 @@
         </div>
         <form class="search-form" action="{{ route('properties.search') }}" method="GET">
             <div class="sf-group">
-                <label>📍 Location</label>
+                <label> Location</label>
                 <select name="location_id">
                     <option value="">All Locations</option>
                     @if($locations->where('classification', 'core_quarter')->count() > 0)
@@ -155,7 +155,7 @@
                 </select>
             </div>
             <div class="sf-group">
-                <label>🏠 Type</label>
+                <label> Type</label>
                 <select name="type">
                     <option value="">Any Type</option>
                     @foreach(['single_room'=>'Single Room','self_contain'=>'Self Contain','mini_flat'=>'Mini Flat','flat'=>'Flat'] as $val=>$label)
@@ -164,11 +164,11 @@
                 </select>
             </div>
             <div class="sf-group">
-                <label>🔍 Keyword</label>
+                <label> Keyword</label>
                 <input type="text" name="q" value="{{ $query }}" placeholder="e.g. Sunshine Lodge...">
             </div>
             <div class="sf-group">
-                <label>💰 Max Price (₦/yr)</label>
+                <label> Max Price (₦/yr)</label>
                 <input type="number" name="max_price" value="{{ $maxPrice }}" placeholder="e.g. 100000" step="5000">
             </div>
             <button type="submit" class="sf-btn">Search</button>
@@ -192,23 +192,23 @@
                 <div class="property-img">
                     <img src="{{ $property->coverImageUrl() }}" alt="{{ $property->title }}" loading="lazy">
                     <div class="prop-badge">{{ $property->typeLabel() }}</div>
-                    <div class="prop-verified">✓ Verified</div>
+                    <div class="prop-verified"> Verified</div>
                 </div>
                 <div class="property-body">
-                    <div class="prop-area">📍 {{ $property->area }}, {{ $property->city }}</div>
+                    <div class="prop-area"> {{ $property->area }}, {{ $property->city }}</div>
                     <div class="prop-title">{{ $property->title }}</div>
                     <div class="prop-desc">{{ $property->description }}</div>
                     <div class="prop-amenities">
-                        @if($property->has_electricity) <span class="prop-tag">⚡ Electricity</span> @endif
-                        @if($property->has_water)      <span class="prop-tag">💧 Water</span>       @endif
+                        @if($property->has_electricity) <span class="prop-tag"> Electricity</span> @endif
+                        @if($property->has_water)      <span class="prop-tag"> Water</span>       @endif
                         @if($property->has_security)   <span class="prop-tag">🔒 Security</span>   @endif
-                        @if($property->is_furnished)   <span class="prop-tag">🛋️ Furnished</span>  @endif
-                        @if($property->allows_cooking) <span class="prop-tag">🍳 Cooking</span>    @endif
+                        @if($property->is_furnished)   <span class="prop-tag"> Furnished</span>  @endif
+                        @if($property->allows_cooking) <span class="prop-tag"> Cooking</span>    @endif
                     </div>
                     <div class="prop-footer">
                         <div>
                             <div class="prop-price">{{ $property->formattedPrice() }} <span>/ year</span></div>
-                            <div class="prop-rooms">🛏 {{ $property->rooms_available }} room{{ $property->rooms_available !== 1 ? 's' : '' }} available</div>
+                            <div class="prop-rooms"> {{ $property->rooms_available }} room{{ $property->rooms_available !== 1 ? 's' : '' }} available</div>
                         </div>
                         <a href="{{ route('login') }}" class="prop-btn">View →</a>
                     </div>

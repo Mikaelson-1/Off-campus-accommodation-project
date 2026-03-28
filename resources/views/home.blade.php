@@ -605,10 +605,10 @@
             <a href="{{ route('properties.search') }}" class="nav-link">Browse Hostels</a>
             <a href="#how-it-works" class="nav-link">How It Works</a>
             <a href="{{ route('login') }}" class="nav-btn nav-btn-student" id="studentLoginBtn">
-                🎓 Student Login
+                 Student Login
             </a>
             <a href="{{ route('register') }}" class="nav-btn nav-btn-landlord" id="listPropertyBtn">
-                🏠 List Your Property
+                 List Your Property
             </a>
         </div>
 
@@ -627,7 +627,7 @@
 
     <div class="hero-content">
         <div class="hero-badge">
-            📍 Ikere-Ekiti, Ekiti State · Verified Listings
+             Ikere-Ekiti, Ekiti State · Verified Listings
         </div>
 
         <h1 class="hero-headline">
@@ -644,7 +644,7 @@
         <!-- Quick Search Bar -->
         <form class="hero-search" action="{{ route('properties.search') }}" method="GET" id="heroSearchForm">
             <div class="hero-search-group">
-                <label for="search_location">📍 Location</label>
+                <label for="search_location"> Location</label>
                 <select name="location_id" id="search_location">
                     <option value="">All Locations</option>
                     @if($locations->where('classification', 'core_quarter')->count() > 0)
@@ -672,7 +672,7 @@
             </div>
 
             <div class="hero-search-group">
-                <label for="search_type">🏠 Type</label>
+                <label for="search_type"> Type</label>
                 <select name="type" id="search_type">
                     <option value="">Any Type</option>
                     <option value="single_room">Single Room</option>
@@ -683,7 +683,7 @@
             </div>
 
             <div class="hero-search-group">
-                <label for="search_q">🔍 Keyword</label>
+                <label for="search_q"> Keyword</label>
                 <input
                     type="text"
                     name="q"
@@ -694,7 +694,7 @@
             </div>
 
             <button type="submit" class="hero-search-btn">
-                🔍 Search
+                 Search
             </button>
         </form>
 
@@ -731,7 +731,7 @@
             <!-- Students Column -->
             <div class="hiw-panel student">
                 <div class="hiw-panel-header">
-                    <div class="hiw-icon green">🎓</div>
+                    <div class="hiw-icon green"></div>
                     <div>
                         <div class="hiw-panel-title">For Students</div>
                         <div class="hiw-panel-subtitle">Secure your accommodation in minutes</div>
@@ -768,14 +768,14 @@
                     </li>
                 </ol>
                 <a href="{{ route('register') }}" class="hiw-cta green" style="margin-top:1.5rem;">
-                    🎓 Register as Student →
+                     Register as Student →
                 </a>
             </div>
 
             <!-- Landlords Column -->
             <div class="hiw-panel landlord">
                 <div class="hiw-panel-header">
-                    <div class="hiw-icon navy">🏠</div>
+                    <div class="hiw-icon navy"></div>
                     <div>
                         <div class="hiw-panel-title">For Landlords</div>
                         <div class="hiw-panel-subtitle">Verified landlords reach thousands of students</div>
@@ -812,7 +812,7 @@
                     </li>
                 </ol>
                 <a href="{{ route('register') }}" class="hiw-cta navy" style="margin-top:1.5rem;">
-                    🏠 List Your Property →
+                     List Your Property →
                 </a>
             </div>
         </div>
@@ -825,7 +825,7 @@
 <section class="section featured" id="featured">
     <div class="section-inner">
         <div class="section-header">
-            <span class="section-eyebrow">✅ Admin-Verified Listings</span>
+            <span class="section-eyebrow"> Admin-Verified Listings</span>
             <h2 class="section-title">Featured Hostels</h2>
             <p class="section-desc">Top-rated, verified accommodation options near BOUESTI campus — all checked by administration.</p>
         </div>
@@ -841,13 +841,13 @@
                             loading="lazy"
                         />
                         <div class="property-badge">{{ $property->typeLabel() }}</div>
-                        <div class="property-verified">✓ Verified</div>
+                        <div class="property-verified"> Verified</div>
                     </div>
 
                     <!-- Card Body -->
                     <div class="property-body">
                         <div class="property-area">
-                            📍 {{ $property->area }}, {{ $property->city }}
+                             {{ $property->area }}, {{ $property->city }}
                         </div>
                         <div class="property-title">{{ $property->title }}</div>
                         <div class="property-desc">{{ $property->description }}</div>
@@ -855,19 +855,19 @@
                         <!-- Amenity Tags -->
                         <div class="property-amenities">
                             @if($property->has_electricity)
-                                <span class="amenity-tag">⚡ Electricity</span>
+                                <span class="amenity-tag"> Electricity</span>
                             @endif
                             @if($property->has_water)
-                                <span class="amenity-tag">💧 Water</span>
+                                <span class="amenity-tag"> Water</span>
                             @endif
                             @if($property->has_security)
                                 <span class="amenity-tag">🔒 Security</span>
                             @endif
                             @if($property->is_furnished)
-                                <span class="amenity-tag">🛋️ Furnished</span>
+                                <span class="amenity-tag"> Furnished</span>
                             @endif
                             @if($property->allows_cooking)
-                                <span class="amenity-tag">🍳 Cooking</span>
+                                <span class="amenity-tag"> Cooking</span>
                             @endif
                         </div>
 
@@ -879,7 +879,7 @@
                                     <span>/ year</span>
                                 </div>
                                 <div class="property-rooms">
-                                    🛏 {{ $property->rooms_available }} room{{ $property->rooms_available !== 1 ? 's' : '' }} available
+                                     {{ $property->rooms_available }} room{{ $property->rooms_available !== 1 ? 's' : '' }} available
                                 </div>
                             </div>
                             <a href="{{ route('login') }}" class="property-btn">
@@ -913,8 +913,8 @@
         <h2>Ready to Find Your Perfect Accommodation?</h2>
         <p>Join hundreds of BOUESTI students who've found safe, affordable housing through our verified platform. No scams. No stress.</p>
         <div class="trust-btns">
-            <a href="{{ route('register') }}" class="trust-btn-primary">🎓 Register as Student</a>
-            <a href="{{ route('register') }}" class="trust-btn-secondary">🏠 List Your Property</a>
+            <a href="{{ route('register') }}" class="trust-btn-primary"> Register as Student</a>
+            <a href="{{ route('register') }}" class="trust-btn-secondary"> List Your Property</a>
         </div>
     </div>
 </section>
