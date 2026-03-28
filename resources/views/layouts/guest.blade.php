@@ -9,8 +9,13 @@
     @if(file_exists(public_path('build/manifest.json')))
         @vite(['resources/css/app.css', 'resources/css/bouesti.css', 'resources/js/app.js'])
     @else
-        <link rel="stylesheet" href="{{ asset('build/assets/app-D79B-wyU.css') }}">
-        <link rel="stylesheet" href="{{ asset('build/assets/bouesti-CrJiLbLU.css') }}">
+        {{-- Fallback: scan the build/assets dir at runtime for the hashed CSS files --}}
+        @foreach(glob(public_path('build/assets/app-*.css')) as $f)
+            <link rel="stylesheet" href="{{ asset('build/assets/' . basename($f)) }}">
+        @endforeach
+        @foreach(glob(public_path('build/assets/bouesti-*.css')) as $f)
+            <link rel="stylesheet" href="{{ asset('build/assets/' . basename($f)) }}">
+        @endforeach
     @endif
     {{ $head ?? '' }}
     <style>
