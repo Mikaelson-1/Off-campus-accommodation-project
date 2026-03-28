@@ -1,6 +1,7 @@
 FROM php:8.4-apache
 
 # Install system dependencies
+# NOTE: libpq-dev removed — this app uses SQLite, not PostgreSQL
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
@@ -8,16 +9,18 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     libonig-dev \
     libxml2-dev \
+    libsqlite3-dev \
     unzip \
     git \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
+# pdo_sqlite is required for SQLite; pdo_pgsql removed (not used)
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) \
+    pdo_sqlite \
     pdo_mysql \
-    pdo_pgsql \
     mbstring \
     exif \
     pcntl \
@@ -26,6 +29,9 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     zip \
     intl \
     opcache
+
+# Apply custom php.ini
+COPY php.ini /usr/local/etc/php/conf.d/custom.ini
 
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
@@ -39,18 +45,22 @@ WORKDIR /var/www/html
 # Copy application files
 COPY . .
 
-# Install dependencies
+# Install PHP dependencies (no dev, optimized)
 RUN composer install --no-dev --optimize-autoloader --no-interaction
+
+# Create the SQLite database file if it doesn't exist
+RUN mkdir -p /var/www/html/database \
+    && touch /var/www/html/database/database.sqlite
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 755 /var/www/html/storage \
-    && chmod -R 755 /var/www/html/bootstrap/cache
+    && chmod -R 755 /var/www/html/bootstrap/cache \
+    && chmod 664 /var/www/html/database/database.sqlite
 
-# Configure Apache
+# Configure Apache virtual host
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-# Create Apache config
 RUN echo '<VirtualHost *:80>\n\
     ServerAdmin webmaster@localhost\n\
     DocumentRoot /var/www/html/public\n\
@@ -66,13 +76,9 @@ RUN echo '<VirtualHost *:80>\n\
 </VirtualHost>' > /etc/apache2/sites-available/000-default.conf
 
 # Create startup script
-RUN echo '#!/bin/bash\n\
-php artisan migrate --force\n\
-php artisan db:seed --force\n\
-php artisan config:cache\n\
-php artisan route:cache\n\
-php artisan view:cache\n\
-apache2-foreground' > /start.sh \
+# Railway injects env vars directly — no .env file needed.
+# We write them to a .env so Laravel can pick them up via its bootstrap.
+RUN printf '#!/bin/bash\nset -e\n\n# Write Railway env vars to .env so Laravel can read them\ncat > /var/www/html/.env <<EOL\nAPP_NAME="${APP_NAME:-BOUESTI Accommodation}"\nAPP_ENV="${APP_ENV:-production}"\nAPP_KEY="${APP_KEY}"\nAPP_DEBUG="${APP_DEBUG:-false}"\nAPP_URL="${APP_URL:-http://localhost}"\nDB_CONNECTION=sqlite\nDB_DATABASE=/var/www/html/database/database.sqlite\nSESSION_DRIVER=database\nCACHE_STORE=database\nQUEUE_CONNECTION=database\nLOG_CHANNEL=stack\nLOG_LEVEL=error\nEOL\n\n# Ensure the SQLite file exists\nmkdir -p /var/www/html/database\ntouch /var/www/html/database/database.sqlite\nchown www-data:www-data /var/www/html/database/database.sqlite\n\n# Run migrations\nphp artisan migrate --force\n\n# Cache for production\nphp artisan config:cache\nphp artisan route:cache\nphp artisan view:cache\n\nexec apache2-foreground\n' > /start.sh \
     && chmod +x /start.sh
 
 # Expose port
