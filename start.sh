@@ -29,7 +29,7 @@ MAIL_MAILER=log
 FILESYSTEM_DISK=local
 ENVEOF
 
-echo "APP_URL=${APP_URL:-http://localhost}" >> /var/www/html/.env
+echo "APP_URL=${APP_URL:-https://bouestihousing.up.railway.app}" >> /var/www/html/.env
 
 # Generate or use APP_KEY
 if [ -z "${APP_KEY}" ]; then
@@ -46,6 +46,12 @@ php artisan migrate --force || echo "WARNING: Migrations failed"
 # ── Seed demo data (Railway filesystem is ephemeral — seed on every start) ────
 echo "==> Seeding database..."
 php artisan db:seed --force || echo "WARNING: Seeding failed"
+
+# ── Clear any stale caches (prevent cached 404 routes on redeploy) ──────────
+echo "==> Clearing caches..."
+php artisan config:clear
+php artisan route:clear
+php artisan view:clear
 
 # ── Start Laravel built-in server (no Apache needed) ─────────────────────────
 PORT="${PORT:-8080}"

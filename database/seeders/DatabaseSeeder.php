@@ -15,6 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Seed admin account first (always needed — Railway DB is ephemeral)
+        $this->call(AdminSeeder::class);
+
         // Seed locations first (required for property assignments)
         $this->call(LocationSeeder::class);
 
