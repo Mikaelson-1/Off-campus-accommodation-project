@@ -84,7 +84,7 @@ class AdminController extends Controller
         ]);
 
         return back()->with('success',
-            "✅ \"{$property->title}\" has been approved and is now live for students."
+            " \"{$property->title}\" has been approved and is now live for students."
         );
     }
 
@@ -144,7 +144,7 @@ class AdminController extends Controller
         ]);
 
         return back()->with('success',
-            "✅ {$landlord->user->name}'s account has been verified."
+            " {$landlord->user->name}'s account has been verified."
         );
     }
 

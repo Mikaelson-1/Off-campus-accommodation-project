@@ -21,6 +21,6 @@ class DatabaseSeeder extends Seeder
         // Seed demo properties with location assignments
         $this->call(PropertySeeder::class);
 
-        $this->command->info('✅ All seeders completed successfully.');
+        $this->command->info(' All seeders completed successfully.');
     }
 }

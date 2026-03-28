@@ -24,6 +24,6 @@ class AdminSeeder extends Seeder
             ]
         );
 
-        $this->command->info('✅ Admin account seeded: admin@bouesti.edu.ng / Admin@1234');
+        $this->command->info(' Admin account seeded: admin@bouesti.edu.ng / Admin@1234');
     }
 }

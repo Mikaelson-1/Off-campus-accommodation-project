@@ -280,6 +280,6 @@ class PropertySeeder extends Seeder
             );
         }
 
-        $this->command->info('✅ ' . count($properties) . ' demo properties seeded with location assignments.');
+        $this->command->info(' ' . count($properties) . ' demo properties seeded with location assignments.');
     }
 }
